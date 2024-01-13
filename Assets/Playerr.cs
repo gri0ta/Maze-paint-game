@@ -1,35 +1,118 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
+public enum Direction
+{
+    Up,Down,Left,Right,None
+}
 public class Playerr : MonoBehaviour
 {
-    public float speed = 5f; // Adjust this to set the player's movement speed
+    public float speed;
+    public Direction direction;
+    Rigidbody2D rb;
+    Collider2D leftCollider;
+    Collider2D rightCollider;
+    Collider2D topCollider;
+    Collider2D bottomCollider;
+    
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        var colliders = new List<Collider2D>();
+        rb.GetAttachedColliders(colliders);
+
+        foreach (var collider in colliders)
+        {
+            if (collider.offset.x == 0) //bottom arba top colliders
+            {
+                if (collider.offset.y >0) //kaip gauti colliderio kintamaji nehackinant?
+                {
+                    topCollider = collider;
+                }
+                else
+                {
+                    bottomCollider= collider;
+                }
+            }
+            else
+            {
+                if (collider.offset.x > 0)
+                {
+                    rightCollider = collider;
+                }
+                else
+                {
+                    leftCollider= collider;
+                }
+            }
+
+        }
+    }
+
 
     void Update()
     {
         // Reset movement each frame
-        Vector3 movement = Vector3.zero;
+        Vector2 movement = Vector2.zero;
 
         // Check for button presses
         if (Input.GetKey(KeyCode.W)) // Move Up
         {
-            movement += Vector3.up;
+            
+            this.direction = Direction.Up;
         }
-        if (Input.GetKey(KeyCode.S)) // Move Down
+        else if (Input.GetKey(KeyCode.S)) // Move Down
         {
-            movement += Vector3.down;
+            
+            this.direction = Direction.Down;
         }
-        if (Input.GetKey(KeyCode.A)) // Move Left
+        else if (Input.GetKey(KeyCode.A)) // Move Left
         {
-            movement += Vector3.left;
+            this.direction = Direction.Left;
         }
-        if (Input.GetKey(KeyCode.D)) // Move Right
+        else if (Input.GetKey(KeyCode.D)) // Move Right
         {
-            movement += Vector3.right;
+            this.direction = Direction.Right;
         }
 
-        // Normalize the movement vector (to prevent faster diagonal movement)
+        switch (this.direction)
+        {
+            case Direction.Up:
+                if (!topCollider.IsTouchingLayers())
+                {
+                    movement = Vector2.up;
+                }
+                
+                break;
+            case Direction.Down:
+                if (!bottomCollider.IsTouchingLayers())
+                {
+                    movement = Vector2.down;
+                }
+               
+                break;
+            case Direction.Left:
+                if (!leftCollider.IsTouchingLayers())
+                {
+                    movement = Vector2.left;
+                }
+                break;
+            case Direction.Right:
+                if (!rightCollider.IsTouchingLayers())
+                {
+                    movement = Vector2.right;
+                }
+                break;
+            default:
+                break;
+        }
+
+        
+        
         movement = movement.normalized * speed * Time.deltaTime;
 
         // Apply movement to the player
