@@ -59,22 +59,22 @@ public class Playerr : MonoBehaviour
         // Reset movement each frame
         Vector2 movement = Vector2.zero;
 
-        // Check for button presses
-        if (Input.GetKey(KeyCode.W)) // Move Up
+        
+        if (Input.GetKey(KeyCode.W))
         {
             
             this.direction = Direction.Up;
         }
-        else if (Input.GetKey(KeyCode.S)) // Move Down
+        else if (Input.GetKey(KeyCode.S)) 
         {
             
             this.direction = Direction.Down;
         }
-        else if (Input.GetKey(KeyCode.A)) // Move Left
+        else if (Input.GetKey(KeyCode.A)) 
         {
             this.direction = Direction.Left;
         }
-        else if (Input.GetKey(KeyCode.D)) // Move Right
+        else if (Input.GetKey(KeyCode.D)) 
         {
             this.direction = Direction.Right;
         }
