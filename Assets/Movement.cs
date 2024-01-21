@@ -3,87 +3,76 @@ using UnityEngine.Tilemaps;
 using DG.Tweening;
 public class Movement : MonoBehaviour
 {
-    public float cycleLenght = 0.5f;
-    /*
-    public void Collision()
-    {
-        // check if grid cell is not empty at player position
+    public float cycleLenght;
+    public Direction direction;
+    
 
-        var map = FindObjectOfType<Tilemap>();
-        // tilebase
+    void Update() { 
 
-        var tilePos = map.WorldToCell(transform.position);
-        var tile = map.GetTile(tilePos);
-    }
-    */
-
-    void Update()
-    {
+    var map = FindObjectOfType<Tilemap>();
+    // tilebase
+    var tilePos = map.WorldToCell(transform.position); //tilePos duoda kurioje koordinateje yra playeris
+                                                       //print(tilePos);
+    var tile = map.GetTile(tilePos); //duoda ar null tile ant kurio stovime
+            //print(tile);
+    
         if (Input.GetKey(KeyCode.W)) //Up
         {
-            var map = FindObjectOfType<Tilemap>();
-            // tilebase
-            var tilePos = map.WorldToCell(transform.position); //tilePos duoda kurioje koordinateje yra playeris
-            //print(tilePos);
-            var tile = map.GetTile(tilePos); //duoda ar null tile ant kurio stovime
-            //print(tile);
-       
-            //tilePos.x += 1;
+            this.direction = Direction.Up;
+            
             if (tile == null)
             {
-                //print("tile is null");
-                transform.DOMove(new Vector3(0, 10, 0), cycleLenght);
+                tilePos.x += 1;
+                print("tile is null");
+                transform.DOMove(new Vector2(0, 10), cycleLenght);
+                
+            }
+            else
+            {
+                
+                print("tile isnt null");
             }
             
         }
         else if (Input.GetKey(KeyCode.S)) //Down
         {
-            var map = FindObjectOfType<Tilemap>();
-            // tilebase
-            var tilePos = map.WorldToCell(transform.position); //tilePos duoda kurioje koordinateje yra playeris
-            //print(tilePos);
-            var tile = map.GetTile(tilePos); //duoda ar null tile ant kurio stovime
-                                             //print(tile);
-
-            //tilePos.x += 1;
+            this.direction = Direction.Down;
+            
             if (tile == null)
             {
+                tilePos.x -= 1;
                 //print("tile is null");
-                transform.DOMove(new Vector3(0, -10, 0), cycleLenght);
+                transform.DOMove(new Vector2(0, -10), cycleLenght);
             }
 
         }
         else if (Input.GetKey(KeyCode.A)) //Left
         {
-            var map = FindObjectOfType<Tilemap>();
-            // tilebase
-            var tilePos = map.WorldToCell(transform.position); //tilePos duoda kurioje koordinateje yra playeris
-            //print(tilePos);
-            var tile = map.GetTile(tilePos); //duoda ar null tile ant kurio stovime
-                                             //print(tile);
+            this.direction = Direction.Left;
+            
 
-            //tilePos.x += 1;
+            
             if (tile == null)
             {
+                tilePos.y += 1;
                 //print("tile is null");
-                transform.DOMove(new Vector3(-10, 0, 0), cycleLenght);
+                transform.DOMove(new Vector2(-10, 0), cycleLenght);
             }
         }
         else if (Input.GetKey(KeyCode.D)) //Right
         {
-            var map = FindObjectOfType<Tilemap>();
-            // tilebase
-            var tilePos = map.WorldToCell(transform.position); //tilePos duoda kurioje koordinateje yra playeris
-            //print(tilePos);
-            var tile = map.GetTile(tilePos); //duoda ar null tile ant kurio stovime
-                                             //print(tile);
+            this.direction = Direction.Right;
+            
 
-            //tilePos.x += 1;
+            
             if (tile == null)
             {
+                tilePos.y -= 1;
                 //print("tile is null");
-                transform.DOMove(new Vector3(10, 0, 0), cycleLenght);
+                transform.DOMove(new Vector2(10, 0), cycleLenght);
             }
         }
     }
+
+    
 }

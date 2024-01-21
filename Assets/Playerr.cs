@@ -3,6 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using DG.Tweening;
+using UnityEngine.Tilemaps;
+using UnityEngine.Networking;
+using UnityEngine.UIElements;
+using System.Drawing;
+using Color = UnityEngine.Color;
 
 public enum Direction
 {
@@ -10,9 +16,15 @@ public enum Direction
 }
 public class Playerr : MonoBehaviour
 {
+    public Tilemap tilemap;
+    public TileBase newTile;
+
+    public float cycleLength;
     public float speed;
     public Direction direction;
+
     Rigidbody2D rb;
+
     Collider2D leftCollider;
     Collider2D rightCollider;
     Collider2D topCollider;
@@ -58,6 +70,7 @@ public class Playerr : MonoBehaviour
     {
         // Reset movement each frame
         Vector2 movement = Vector2.zero;
+        
 
         
         if (Input.GetKey(KeyCode.W))
@@ -85,6 +98,7 @@ public class Playerr : MonoBehaviour
                 if (!topCollider.IsTouchingLayers())
                 {
                     movement = Vector2.up;
+                    //movement = transform.DOMove(new Vector2(0, 10), cycleLength);
                 }
                 
                 break;
@@ -111,11 +125,27 @@ public class Playerr : MonoBehaviour
                 break;
         }
 
-        
-        
+
+        Vector3Int cellPosition = tilemap.WorldToCell(transform.position);
+
+        TileBase tile = tilemap.GetTile(cellPosition);
+
+        if (tile != null)
+        {
+            tilemap.SetColor(cellPosition, Color.red);
+            //ChangeTileColor(cellPosition, newTile);
+        }
+
+        tilemap.SetTileFlags(cellPosition, TileFlags.None);
+
         movement = movement.normalized * speed * Time.deltaTime;
 
         // Apply movement to the player
         transform.Translate(movement);
+    }
+
+    void ChangeTileColor(Vector3Int cellPosition, TileBase newTile) //pakeicia single tile color arba texture
+    {
+        tilemap.SetTile(cellPosition, newTile);
     }
 }
