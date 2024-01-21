@@ -10,10 +10,13 @@ using UnityEngine.UIElements;
 using System.Drawing;
 using Color = UnityEngine.Color;
 
+
+
 public enum Direction
 {
     Up,Down,Left,Right,None
 }
+
 public class Playerr : MonoBehaviour
 {
     public Tilemap tilemap;
@@ -21,6 +24,7 @@ public class Playerr : MonoBehaviour
 
     public float cycleLength;
     public float speed;
+
     public Direction direction;
 
     Rigidbody2D rb;
@@ -29,10 +33,17 @@ public class Playerr : MonoBehaviour
     Collider2D rightCollider;
     Collider2D topCollider;
     Collider2D bottomCollider;
-    
+
+    //public List<Color> colorList = new List<Color>();
+
+    //Color randomColor = GetRandomColor();
 
     void Start()
     {
+        BoundsInt bounds = tilemap.cellBounds;
+        TileBase[] allTiles = tilemap.GetTilesBlock(bounds);
+        //int tileCount = CountTiles(tilemap)
+
         rb = GetComponent<Rigidbody2D>();
         var colliders = new List<Collider2D>();
         rb.GetAttachedColliders(colliders);
@@ -41,13 +52,13 @@ public class Playerr : MonoBehaviour
         {
             if (collider.offset.x == 0) //bottom arba top colliders
             {
-                if (collider.offset.y >0) //kaip gauti colliderio kintamaji nehackinant?
+                if (collider.offset.y > 0) //kaip gauti colliderio kintamaji nehackinant?
                 {
                     topCollider = collider;
                 }
                 else
                 {
-                    bottomCollider= collider;
+                    bottomCollider = collider;
                 }
             }
             else
@@ -58,36 +69,35 @@ public class Playerr : MonoBehaviour
                 }
                 else
                 {
-                    leftCollider= collider;
+                    leftCollider = collider;
                 }
             }
 
         }
     }
 
-
     void Update()
     {
         // Reset movement each frame
         Vector2 movement = Vector2.zero;
-        
 
-        
+
+
         if (Input.GetKey(KeyCode.W))
         {
-            
+
             this.direction = Direction.Up;
         }
-        else if (Input.GetKey(KeyCode.S)) 
+        else if (Input.GetKey(KeyCode.S))
         {
-            
+
             this.direction = Direction.Down;
         }
-        else if (Input.GetKey(KeyCode.A)) 
+        else if (Input.GetKey(KeyCode.A))
         {
             this.direction = Direction.Left;
         }
-        else if (Input.GetKey(KeyCode.D)) 
+        else if (Input.GetKey(KeyCode.D))
         {
             this.direction = Direction.Right;
         }
@@ -100,14 +110,14 @@ public class Playerr : MonoBehaviour
                     movement = Vector2.up;
                     //movement = transform.DOMove(new Vector2(0, 10), cycleLength);
                 }
-                
+
                 break;
             case Direction.Down:
                 if (!bottomCollider.IsTouchingLayers())
                 {
                     movement = Vector2.down;
                 }
-               
+
                 break;
             case Direction.Left:
                 if (!leftCollider.IsTouchingLayers())
@@ -129,13 +139,11 @@ public class Playerr : MonoBehaviour
         Vector3Int cellPosition = tilemap.WorldToCell(transform.position);
 
         TileBase tile = tilemap.GetTile(cellPosition);
-
         if (tile != null)
         {
             tilemap.SetColor(cellPosition, Color.red);
-            //ChangeTileColor(cellPosition, newTile);
+            
         }
-
         tilemap.SetTileFlags(cellPosition, TileFlags.None);
 
         movement = movement.normalized * speed * Time.deltaTime;
@@ -143,9 +151,7 @@ public class Playerr : MonoBehaviour
         // Apply movement to the player
         transform.Translate(movement);
     }
-
-    void ChangeTileColor(Vector3Int cellPosition, TileBase newTile) //pakeicia single tile color arba texture
-    {
-        tilemap.SetTile(cellPosition, newTile);
-    }
+   
+        
+    
 }
