@@ -9,6 +9,8 @@ using UnityEngine.Networking;
 using UnityEngine.UIElements;
 using System.Drawing;
 using Color = UnityEngine.Color;
+using UnityEngine.SceneManagement;
+
 
 
 
@@ -24,6 +26,10 @@ public class Playerr : MonoBehaviour
 
     public float cycleLength;
     public float speed;
+    private int result = 0;
+    public int goal;
+    
+    public string nextLevel;
 
     public Direction direction;
 
@@ -40,9 +46,6 @@ public class Playerr : MonoBehaviour
 
     void Start()
     {
-        BoundsInt bounds = tilemap.cellBounds;
-        TileBase[] allTiles = tilemap.GetTilesBlock(bounds);
-        //int tileCount = CountTiles(tilemap)
 
         rb = GetComponent<Rigidbody2D>();
         var colliders = new List<Collider2D>();
@@ -139,17 +142,34 @@ public class Playerr : MonoBehaviour
         Vector3Int cellPosition = tilemap.WorldToCell(transform.position);
 
         TileBase tile = tilemap.GetTile(cellPosition);
-        if (tile != null)
+        
+        if (tile != null && tilemap.GetColor(cellPosition) != Color.red)
         {
+            print(result.ToString() +" "+  goal.ToString());
             tilemap.SetColor(cellPosition, Color.red);
+            if (++result == goal*2) //kodel kiekvienam langeli suveikia 2 kartus
+            {
+                NextLevel();
+            }
             
         }
         tilemap.SetTileFlags(cellPosition, TileFlags.None);
-
+        
         movement = movement.normalized * speed * Time.deltaTime;
 
         // Apply movement to the player
         transform.Translate(movement);
+    }
+
+    void NextLevel()
+    {
+        Vector2 movement = Vector2.zero;
+        transform.Translate(movement);
+        result = 1;
+
+        
+        SceneManager.LoadScene(nextLevel);
+        
     }
    
         
