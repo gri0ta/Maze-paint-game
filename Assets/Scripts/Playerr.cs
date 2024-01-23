@@ -24,7 +24,7 @@ public class Playerr : MonoBehaviour
     public Tilemap tilemap;
     public TileBase newTile;
 
-    public float cycleLength;
+    
     public float speed;
     private int result = 0;
     public int goal;
@@ -40,10 +40,6 @@ public class Playerr : MonoBehaviour
     Collider2D topCollider;
     Collider2D bottomCollider;
 
-    //public List<Color> colorList = new List<Color>();
-
-    //Color randomColor = GetRandomColor();
-
     void Start()
     {
 
@@ -55,7 +51,7 @@ public class Playerr : MonoBehaviour
         {
             if (collider.offset.x == 0) //bottom arba top colliders
             {
-                if (collider.offset.y > 0) //kaip gauti colliderio kintamaji nehackinant?
+                if (collider.offset.y > 0) 
                 {
                     topCollider = collider;
                 }
@@ -81,7 +77,7 @@ public class Playerr : MonoBehaviour
 
     void Update()
     {
-        // Reset movement each frame
+        //resetina movementa
         Vector2 movement = Vector2.zero;
 
 
@@ -90,19 +86,22 @@ public class Playerr : MonoBehaviour
         {
 
             this.direction = Direction.Up;
+            
         }
         else if (Input.GetKey(KeyCode.S))
         {
-
             this.direction = Direction.Down;
+            
         }
         else if (Input.GetKey(KeyCode.A))
         {
             this.direction = Direction.Left;
+            
         }
         else if (Input.GetKey(KeyCode.D))
         {
             this.direction = Direction.Right;
+            
         }
 
         switch (this.direction)
@@ -111,7 +110,8 @@ public class Playerr : MonoBehaviour
                 if (!topCollider.IsTouchingLayers())
                 {
                     movement = Vector2.up;
-                    //movement = transform.DOMove(new Vector2(0, 10), cycleLength);
+                    
+                    
                 }
 
                 break;
@@ -126,12 +126,14 @@ public class Playerr : MonoBehaviour
                 if (!leftCollider.IsTouchingLayers())
                 {
                     movement = Vector2.left;
+                    
                 }
                 break;
             case Direction.Right:
                 if (!rightCollider.IsTouchingLayers())
                 {
                     movement = Vector2.right;
+                    
                 }
                 break;
             default:
@@ -157,8 +159,8 @@ public class Playerr : MonoBehaviour
         
         movement = movement.normalized * speed * Time.deltaTime;
 
-        // Apply movement to the player
-        transform.Translate(movement);
+       
+        transform.Translate(movement);//applyina movement playeriui
     }
 
     void NextLevel()
@@ -166,12 +168,10 @@ public class Playerr : MonoBehaviour
         Vector2 movement = Vector2.zero;
         transform.Translate(movement);
         result = 1;
-
-        
         SceneManager.LoadScene(nextLevel);
         
     }
-   
-        
     
+
+
 }
