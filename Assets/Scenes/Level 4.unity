@@ -227,7 +227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5920819514951380291, guid: 1fe6d12d7227b4d4fbdc95f3e4967618, type: 3}
       propertyPath: speed
-      value: 7
+      value: 10.6
       objectReference: {fileID: 0}
     - target: {fileID: 5920819514951380291, guid: 1fe6d12d7227b4d4fbdc95f3e4967618, type: 3}
       propertyPath: newTile

@@ -235,11 +235,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5920819514951380291, guid: 1fe6d12d7227b4d4fbdc95f3e4967618, type: 3}
       propertyPath: goal
-      value: 36
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 5920819514951380291, guid: 1fe6d12d7227b4d4fbdc95f3e4967618, type: 3}
       propertyPath: speed
-      value: 7
+      value: 10.4
       objectReference: {fileID: 0}
     - target: {fileID: 5920819514951380291, guid: 1fe6d12d7227b4d4fbdc95f3e4967618, type: 3}
       propertyPath: newTile
@@ -875,6 +875,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: 1, y: 3, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 1
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 3, y: 3, z: 0}
     second:
       serializedVersion: 2
@@ -969,15 +979,15 @@ Tilemap:
   m_TileAssetArray:
   - m_RefCount: 44
     m_Data: {fileID: 11400000, guid: 4fc74a8c89c4d0f449c68bc331951bc5, type: 2}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: f40a38e7285d2a841bfab2ae1e1ab18c, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 44
+  - m_RefCount: 45
     m_Data: {fileID: -1243149218, guid: 37826bf8bc52bb74aa61c8b78f719b45, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   m_TileMatrixArray:
-  - m_RefCount: 44
+  - m_RefCount: 45
     m_Data:
       e00: 1
       e01: 0
@@ -996,7 +1006,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 44
+  - m_RefCount: 45
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -1774,7 +1784,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 0.45087218, g: 0.6415094, b: 0.49276108, a: 1}
+  m_Color: {r: 0.35978103, g: 0.990566, b: 0.50138575, a: 1}
   m_Origin: {x: -4, y: -4, z: 0}
   m_Size: {x: 8, y: 8, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}

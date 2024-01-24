@@ -223,11 +223,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5920819514951380291, guid: 1fe6d12d7227b4d4fbdc95f3e4967618, type: 3}
       propertyPath: goal
-      value: 36
+      value: 43
       objectReference: {fileID: 0}
     - target: {fileID: 5920819514951380291, guid: 1fe6d12d7227b4d4fbdc95f3e4967618, type: 3}
       propertyPath: speed
-      value: 7
+      value: 10.8
       objectReference: {fileID: 0}
     - target: {fileID: 5920819514951380291, guid: 1fe6d12d7227b4d4fbdc95f3e4967618, type: 3}
       propertyPath: newTile
@@ -239,7 +239,7 @@ PrefabInstance:
       objectReference: {fileID: 853869551}
     - target: {fileID: 5920819514951380291, guid: 1fe6d12d7227b4d4fbdc95f3e4967618, type: 3}
       propertyPath: nextLevel
-      value: SampleScene
+      value: Level 6
       objectReference: {fileID: 0}
     - target: {fileID: 8059911958191774543, guid: 1fe6d12d7227b4d4fbdc95f3e4967618, type: 3}
       propertyPath: m_Name

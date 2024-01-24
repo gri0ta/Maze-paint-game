@@ -170,6 +170,7 @@ public class Playerr : MonoBehaviour
         result = 1;
         SceneManager.LoadScene(nextLevel);
         
+        
     }
     
 
