@@ -28,8 +28,8 @@ public class Playerr : MonoBehaviour
     public float speed;
     private int result = 0;
     public int goal;
-    
     public string nextLevel;
+  
 
     public Direction direction;
 
@@ -42,7 +42,7 @@ public class Playerr : MonoBehaviour
 
     void Start()
     {
-
+        
         rb = GetComponent<Rigidbody2D>();
         var colliders = new List<Collider2D>();
         rb.GetAttachedColliders(colliders);
